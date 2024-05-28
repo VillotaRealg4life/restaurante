@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with FoodHut landing page.">
+    <meta name="author" content="Devcrud">
+    <title>2R PARRILLA </title>
+   
+    <!-- font icons -->
+    <link rel="stylesheet" href="{% static 'vendors/themify-icons/css/themify-icons.css' %}">
+
+    <link rel="stylesheet" href="{% static '/vendors/animate/animate.css' %}">
+
+    <!-- Bootstrap + FoodHut main styles -->
+    <link rel="stylesheet" href="{% static '/css/foodhut.css' %}">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+    
+    <!-- Navbar -->
+    <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">INICIO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">INFORMACION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#book-table">SERVICIO TIQUETERA</a>
+                </li>
+            </ul>
+            <a class="navbar-brand m-auto" href="#">
+                <img src="{% static '/imgs/logo.svg' %}" class="brand-img" alt="">
+                <span class="brand-txt">2R PARRILLA</span>
+            </a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                </li>
+                <li class="nav-item">
+                    
+                </li>
+                <li class="nav-item">
+                    
+                </li>
+                
+            </ul>
+        </div>
+    </nav>
+    <!-- header -->
+    <header id="home" class="header">
+        <div class="overlay text-white text-center">
+            <h1 class="display-2 font-weight-bold my-3">2R PARRILLA</h1>
+            <h2 class="display-4 mb-5">DELICIAS &amp; SABORES</h2>
+        </div>
+    </header>
+
+    <!--  About Section  -->
+    <div id="about" class="container-fluid wow fadeIn" id="about"data-wow-duration="1.5s">
+        <div class="row">
+            <div class="col-lg-6 has-img-bg"></div>
+            <div class="col-lg-6">
+                <div class="row justify-content-center">
+                    <div class="col-sm-8 py-5 my-5">
+                        <h2 class="mb-4">SOBRE NOSOTROS</h2>
+                        <p>En nuestro establecimiento, nos enorgullece ofrecer a nuestros clientes un ambiente siempre tranquilo y agradable, donde pueden disfrutar de una experiencia culinaria única. Nuestro compromiso con la excelencia se refleja en nuestro menú diario especial, cuidadosamente elaborado para satisfacer los paladares más exigentes.
+
+                            Cada día, nuestro talentoso equipo de chefs prepara una selección de platos que abarcan desde los clásicos de la carta hasta los deliciosos almuerzos ejecutivos, garantizando una variedad que deleitará a todos los comensales. Desde entradas exquisitas hasta postres tentadores, cada detalle se cuida con esmero para ofrecer una experiencia gastronómica inolvidable.
+                            
+                            Además de nuestra oferta gastronómica, nos esforzamos por crear un ambiente acogedor donde nuestros clientes puedan relajarse y disfrutar de la compañía de sus seres queridos. Ya sea que estén celebrando una ocasión especial o simplemente buscando un lugar tranquilo para disfrutar de una comida deliciosa, nuestro equipo está aquí para hacer que cada visita sea memorable.
+                            
+                            Estamos comprometidos con la calidad, la hospitalidad y la satisfacción del cliente en cada paso del camino. Desde el momento en que ingresa por nuestras puertas hasta el momento en que se va, nos esforzamos por brindarle una experiencia excepcional que lo haga sentir como en casa.
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
+        <div class="">
+            <h2 class="section-title mb-5">RESERVACIONES</h2>
+            <form method="post" action="{% url 'create_reservation' %}">
+                {% csrf_token %}
+                <div class="row mb-5">
+                    <div class="col-sm-6 col-md-4 col-lg-3 my-2">
+                        <label for="name">Nombre</label>
+                        <input type="text" name="name" id="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" autocomplete="name">
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3 my-2">
+                        <label for="phone">Teléfono</label>
+                        <input type="text" name="phone" id="phone" class="form-control form-control-lg custom-form-control" placeholder="Teléfono" autocomplete="tel">
+                    </div>
+                    <div class="col-sm-6 col-md-4 col-lg-3 my-2">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" name="email" id="email" class="form-control form-control-lg custom-form-control" placeholder="Correo electrónico" autocomplete="email">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">RESERVAR MESA</button>
+            </form>
+        </div>
+    </div>
+    
+    
+    <div id="testmonial" class="container-fluid wow fadeIn bg-dark text-light has-height-lg middle-items">
+        <h2 class="section-title my-5 text-center">RESERVAS</h2>
+        <div class="row mt-3 mb-5">
+            {% for reservation in reservations %}
+            <div class="col-md-4 my-3 my-md-0">
+                <div class="testmonial-card">
+                    <h3 class="testmonial-title">{{ reservation.name }}</h3>
+                    <h6 class="testmonial-subtitle">{{ reservation.email }}</h6>
+                    <div class="testmonial-body">
+                        <p>Teléfono: {{ reservation.phone }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    
+
+    <div id="testmonial" class="container-fluid wow fadeIn bg-dark text-light has-height-lg middle-items">
